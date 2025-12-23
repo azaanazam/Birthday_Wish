@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VIP Birthday Countdown - Meerub</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background:linear-gradient(135deg,#ff5f6d,#ffc371,#6a11cb,#2575fc,#ff9a9e,#fad0c4);
+  background-size:600% 600%;
+  animation:bgGradient 6s linear infinite;
+}
+
+@keyframes bgGradient{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+
+.container{
+  width:100%;
+  max-width:1100px;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  z-index:5;
+}
+
+
+h1{
+  font-size:clamp(32px,6vw,80px);
+  margin-bottom:15px;
+  animation:textWave 3s infinite;
+}
+
+@keyframes textWave{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+}
+
+.name{
+  font-size:clamp(42px,8vw,100px);
+  font-weight:900;
+  margin:10px 0;
+  animation:glowBounce 2s infinite alternate,wave 3s infinite;
+}
+
+@keyframes glowBounce{
+  0%{text-shadow:0 0 20px #fff;}
+  50%{text-shadow:0 0 50px #ffe600;}
+  100%{text-shadow:0 0 30px #ff69b4;}
+}
+
+@keyframes wave{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+.age{
+  font-size:clamp(18px,4vw,40px);
+  margin-bottom:10px;
+  animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+.dua{
+  font-size:clamp(16px,3.5vw,36px);
+  line-height:1.5;
+  margin:10px 0;
+  color:#fffacd;
+}
+
+
+.cake-container{
+  margin:20px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.heart{
+  font-size:clamp(60px,15vw,120px);
+  animation:pulseHeart 1.5s infinite alternate;
+  color:#ff2d55;
+  text-shadow:0 0 15px #fff,0 0 30px #ff6eb4;
+}
+
+@keyframes pulseHeart{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+
+.cake-name{
+  font-size:clamp(18px,4vw,40px);
+  font-family:'Brush Script MT',cursive;
+}
+
+.sher{
+  font-size:clamp(14px,3vw,32px);
+  margin-top:15px;
+  text-shadow:0 0 15px #000;
+}
+
+.timer{
+  font-size:clamp(36px,8vw,70px);
+  color:#ffeb3b;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+
+.falling{
+  position:absolute;
+  top:-60px;
+  opacity:0.9;
+  animation:fallDown linear infinite;
+  z-index:1;
+}
+
+@keyframes fallDown{
+  from{transform:translateY(-80px) rotate(0deg);}
+  to{transform:translateY(120vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="container">
+  <div class="timer" id="timer">10</div>
+</div>
+
+<div id="balloons"></div>
+<div id="confetti"></div>
+<div id="emojis"></div>
+
+<script>
+let countdown=10;
+const timer=document.getElementById("timer");
+const container=document.getElementById("container");
+
+const interval=setInterval(()=>{
+  if(countdown>0){
+    timer.textContent=countdown--;
+  }else{
+    clearInterval(interval);
+    timer.textContent="12:00 AM 27 December";
+    setTimeout(startBirthday,2000);
+  }
+},1000);
+
+function startBirthday(){
+  container.innerHTML=`
+    <h1>🎉 Happy Birthday 🎉</h1>
+    <div class="name">Meerub</div>
+    <div class="age">18 Years Young ✨</div>
+    <div class="dua">
+      🌸 May Allah bless you with endless smiles 😊<br>
+      💖 Love, peace & joy 🌈<br>
+      🙏 Health, wisdom & success 🏆<br>
+      ✨ Dreams come true 💫
+    </div>
+    <div class="cake-container">
+      <div class="heart">❤️</div>
+      <div class="cake-name">Meerub 🎉</div>
+    </div>
+    <div class="sher">🌹 Khushiyo se bhari rahe zindagi 🌹</div>
+  `;
+
+ 
+  const balloonColors=["#ff5f6d","#6a11cb","#2575fc","#ffe600","#ff69b4","#00ffcc"];
+  for(let i=0;i<30;i++){
+    let b=document.createElement("div");
+    b.className="falling";
+    b.style.background=balloonColors[Math.floor(Math.random()*balloonColors.length)];
+    b.style.width=(20+Math.random()*30)+"px";
+    b.style.height=(30+Math.random()*40)+"px";
+    b.style.left=Math.random()*100+"%";
+    b.style.animationDuration=(4+Math.random()*5)+"s";
+    document.getElementById("balloons").appendChild(b);
+  }
+
+  
+  for(let i=0;i<60;i++){
+    let c=document.createElement("div");
+    c.className="falling";
+    c.style.background=balloonColors[Math.floor(Math.random()*balloonColors.length)];
+    c.style.width=(5+Math.random()*8)+"px";
+    c.style.height=(5+Math.random()*8)+"px";
+    c.style.left=Math.random()*100+"%";
+    c.style.animationDuration=(3+Math.random()*5)+"s";
+    document.getElementById("confetti").appendChild(c);
+  }
+
+  
+  const emojis=["🎉","🎂","🎈","💖","✨","🎁","😍","🌸","🍰","🎶"];
+  for(let i=0;i<50;i++){
+    let e=document.createElement("div");
+    e.className="falling";
+    e.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.fontSize=(18+Math.random()*24)+"px";
+    e.style.left=Math.random()*100+"%";
+    e.style.animationDuration=(3+Math.random()*5)+"s";
+    document.getElementById("emojis").appendChild(e);
+  }
+}
+</script>
+
+</body>
+</html>

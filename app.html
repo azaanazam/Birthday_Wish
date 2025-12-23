@@ -1,0 +1,223 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VVIP Birthday Celebration - Meerub</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background: linear-gradient(135deg,#ff5f6d,#ffc371,#6a11cb,#2575fc,#ff9a9e,#fad0c4);
+  background-size: 600% 600%;
+  animation: bgGradient 8s ease infinite;
+}
+@keyframes bgGradient{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+.container{
+  text-align:center;
+  color:#fff;
+  position:relative;
+  z-index:2;
+}
+h1{
+  font-size:90px;
+  margin-bottom:20px;
+  animation:textWave 3s ease-in-out infinite;
+}
+@keyframes textWave{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-20px);}
+}
+.name{
+  font-size:110px;
+  font-weight:900;
+  margin:10px 0;
+  animation: glowBounce 2s infinite alternate, wave 3s ease-in-out infinite;
+}
+@keyframes glowBounce{
+  0%{text-shadow:0 0 20px #fff;}
+  50%{text-shadow:0 0 60px #ffe600, 0 0 30px #ff69b4;}
+  100%{text-shadow:0 0 40px #ff69b4;}
+}
+@keyframes wave{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+.age{
+  font-size:45px;
+  margin-bottom:20px;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-25px);}
+}
+.dua{
+  font-size:36px;
+  font-style:italic;
+  margin:15px 0;
+  color:#fffacd;
+  animation: fadeSlide 4s ease-in-out infinite alternate;
+}
+@keyframes fadeSlide{
+  0%{opacity:0; transform:translateY(20px);}
+  50%{opacity:1; transform:translateY(0);}
+  100%{opacity:0; transform:translateY(20px);}
+}
+.cake-container{
+  position:relative;
+  margin:20px auto;
+  width:150px;
+  height:150px;
+}
+.cake-name{
+  margin-top:15px;
+  font-size:45px;
+  font-weight:bold;
+  color:#fff;
+  text-shadow:0 0 20px #000;
+  font-family: 'Brush Script MT', cursive;
+  animation: glowBounce 2s infinite alternate;
+}
+.sher{
+  font-size:38px;
+  font-style:italic;
+  color:#fff;
+  margin-top:25px;
+  text-shadow:0 0 20px #000;
+  animation: fadeSlide 4s ease-in-out infinite alternate;
+}
+.timer{
+  font-size:70px;
+  font-weight:bold;
+  color:#ffeb3b;
+  text-shadow:0 0 15px #000;
+  margin-bottom:25px;
+}
+
+/* Falling items */
+.falling{
+  position:absolute;
+  top:-50px;
+  opacity:0.9;
+  border-radius:50%;
+  animation-name:fallDown;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+}
+@keyframes fallDown{
+  0%{transform: translateY(-50px) rotate(0deg);}
+  100%{transform: translateY(120vh) rotate(360deg);}
+}
+
+/* Heart pulse */
+@keyframes pulseHeart{
+  0%{transform: scale(1);}
+  50%{transform: scale(1.2);}
+  100%{transform: scale(1);}
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="container">
+  <div class="timer" id="timer">10</div>
+</div>
+
+<div id="balloons"></div>
+<div id="confetti"></div>
+<div id="emojis"></div>
+
+<script>
+// Countdown 10 seconds
+let countdown = 10;
+const timerDisplay = document.getElementById("timer");
+const container = document.getElementById("container");
+
+const countdownInterval = setInterval(()=>{
+  if(countdown>0){
+    timerDisplay.textContent = countdown;
+    countdown--;
+  }else{
+    clearInterval(countdownInterval);
+    timerDisplay.textContent = "12:00 AM 27 December";
+    setTimeout(startBirthday,2000);
+  }
+},1000);
+
+// VIP Birthday Function
+function startBirthday(){
+  container.innerHTML = `
+    <h1>🎉 Happy Birthday 🎉</h1>
+    <div class="name">Meerub</div>
+    <div class="age">18 Years Young ✨</div>
+    <div class="dua">
+      🌸 May Allah bless you with endless smiles 😊<br>
+      💖 Love, peace, and joy 🌈<br>
+      🙏 Health, wisdom, success 🏆<br>
+      ✨ Dreams come true 💫<br>
+      🎂 Every birthday better than the last 🎁
+    </div>
+    <div class="cake-container">
+      <div style="
+        font-size:150px; 
+        text-align:center;
+        color:#ff2d55;
+        text-shadow: 0 0 20px #fff, 0 0 40px #ff6eb4;
+        animation: pulseHeart 1.5s infinite alternate;
+      ">❤️</div>
+      <div class="cake-name">Meerub 🎉</div>
+    </div>
+    <div class="sher">🌹 Khushiyo se bhari rahe zindagi, har pal rahe rangin aur hasi se bhari 🌹</div>
+  `;
+
+  // Balloons
+  const balloonColors = ["#ff5f6d","#6a11cb","#2575fc","#ffe600","#ff69b4","#00ffcc"];
+  for(let i=0;i<40;i++){
+    let b = document.createElement("div");
+    b.className = "falling";
+    b.style.background = balloonColors[Math.floor(Math.random()*balloonColors.length)];
+    b.style.width = (30+Math.random()*35)+"px";
+    b.style.height = (40+Math.random()*55)+"px";
+    b.style.left = Math.random()*100+"%";
+    b.style.animationDuration = (4+Math.random()*5)+"s";
+    document.getElementById("balloons").appendChild(b);
+  }
+
+  // Confetti
+  const confettiColors = ["#ff5f6d","#6a11cb","#2575fc","#ffe600","#ff69b4","#00ffcc"];
+  for(let i=0;i<70;i++){
+    let c = document.createElement("div");
+    c.className = "falling";
+    c.style.background = confettiColors[Math.floor(Math.random()*confettiColors.length)];
+    c.style.width = (5+Math.random()*10)+"px";
+    c.style.height = (5+Math.random()*10)+"px";
+    c.style.left = Math.random()*100+"%";
+    c.style.animationDuration = (3+Math.random()*5)+"s";
+    document.getElementById("confetti").appendChild(c);
+  }
+
+  // Emojis
+  const emojiList = ["🎉","🎂","🎈","💖","✨","🎁","😍","🌸","🍰","🎶"];
+  for(let i=0;i<60;i++){
+    let e = document.createElement("div");
+    e.className = "falling";
+    e.textContent = emojiList[Math.floor(Math.random()*emojiList.length)];
+    e.style.fontSize = (25+Math.random()*30)+"px";
+    e.style.left = Math.random()*100+"%";
+    e.style.animationDuration = (3+Math.random()*5)+"s";
+    document.getElementById("emojis").appendChild(e);
+  }
+}
+</script>
+
+</body>
+</html> -->
